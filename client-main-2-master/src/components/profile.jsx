@@ -1,5 +1,5 @@
 import * as React from 'react';
-import "./profile.css";
+
 
 //import Button from '@mui/material/Button';
 import commonApi from "../api/common";
@@ -107,8 +107,8 @@ export default function Profile() {
           <Container maxWidth="sm">
 
             <Stack direction="row" spacing={4} sx={{ mt: 5 }} >
-             
-              <Avatar mt={2} sx={{ width: 56, height: 56 }}>
+          
+              <Avatar mt={2} sx={{ width: 65, height: 65 }}>
 
              <img  alt = "profile" src={(file && URL.createObjectURL(file)) || "http://localhost:8060/public/" + user.profileImage} className="profileUserImg" />
              
