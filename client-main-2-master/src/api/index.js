@@ -6,7 +6,7 @@ const GET = "GET";
 const DELETE = "DELETE";
 const POST = "POST";
 const PUT = "PUT";
-const PATCH = "PATCH";
+//const PATCH = "PATCH";
 
 const ACTION_HANDLERS = {
   [GET]: (url, data, headers) => {

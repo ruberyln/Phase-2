@@ -75,7 +75,7 @@ export default function Suggestions() {
 
                                         <ListItemAvatar>
 
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                            <Avatar alt="Remy Sharp" src={"http://localhost:8060/public/" + list?.profileImage}  />
                                         </ListItemAvatar>
 
                                         <ListItemText
@@ -102,6 +102,7 @@ export default function Suggestions() {
                                 </List>
                             </Grid>
                         ))}
+                        {lists.length === 0 && <div>No Suggestions Found</div>}
                     </Grid>
                 </Box>
 

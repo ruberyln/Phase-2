@@ -177,7 +177,7 @@ export default function MiniDrawer({fetchPosts}) {
                   justifyContent: 'center',
                 }}
               >
-               <HomeOutlinedIcon />
+               <HomeOutlinedIcon  color = "secondary"/>
 
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
@@ -204,7 +204,7 @@ export default function MiniDrawer({fetchPosts}) {
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
                 }}>
-                <CameraAltOutlinedIcon  />
+                <CameraAltOutlinedIcon color = "secondary"  />
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -230,7 +230,7 @@ export default function MiniDrawer({fetchPosts}) {
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
                 }}>
-              <PersonOutlinedIcon />
+              <PersonOutlinedIcon color = "secondary" />
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -254,7 +254,7 @@ export default function MiniDrawer({fetchPosts}) {
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
                 }}>
-                <PersonAddAltIcon />
+                <PersonAddAltIcon  color = "secondary"/>
 
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
@@ -281,7 +281,7 @@ export default function MiniDrawer({fetchPosts}) {
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
                 }}>
-                <PowerSettingsNewOutlinedIcon />
+                <PowerSettingsNewOutlinedIcon  color = "secondary"/>
 
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />

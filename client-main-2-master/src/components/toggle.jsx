@@ -50,17 +50,17 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function Toggle() {
+export default function Toggle({ handleToggle }) {
   return (
-<Box  sx={{
-            marginTop: 11,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}>
-      <Stack direction="row" spacing={1} alignItems="flex-end" justifyContent= "flex-end">
+<Box sx={{
+      marginTop: 11,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    }}>
+      <Stack direction="row" spacing={1} alignItems="flex-end" justifyContent="flex-end">
         <Typography>Others</Typography>
-        <AntSwitch Checked color ="secondary" inputProps={{ 'aria-label': 'ant design' }}
+        <AntSwitch  color ="secondary"  onChange={handleToggle} inputProps={{ 'aria-label': 'ant design' }}
 
   />
         <Typography>Following</Typography>

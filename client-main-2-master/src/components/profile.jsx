@@ -22,7 +22,7 @@ import Drawer from './drawer'
 import { useState, useEffect } from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { useLocation } from 'react-router';
 
 
 
@@ -34,7 +34,7 @@ const Input = styled('input')({
 });
 
 export default function Profile() {
-
+  const location=useLocation();
 
   const { dispatch } = useContext(Context);
   const { user } = useContext(Context);
@@ -80,14 +80,14 @@ export default function Profile() {
 
     })}
   useEffect(() => {
-    fetchUser();
+    //fetchUser();
     fetchPosts();
   
     if (file) {
       handleImage()
     }
 
-  }, [file]);
+  }, [file,location.pathname]);
 
 
   return (
@@ -145,6 +145,16 @@ export default function Profile() {
                 variant="outlined"
                   sx={{  height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
+                  <div>
+                   <Avatar mt={2} sx={{ width: 60, height: 60 }}>
+
+                    <img src={(file && URL.createObjectURL(file)) || "http://localhost:8060/public/" + user.profileImage} className="profileUserImg" />
+
+                    </Avatar><Typography variant="h5">
+                    {user.firstName}
+                    </Typography>
+                    </div>
+
                   <CardMedia
                     component="img"
                     sx={{

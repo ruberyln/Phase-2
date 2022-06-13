@@ -41,6 +41,7 @@ export default function Followers() {
 
         }).then((res) => {
 
+            fetchFollowers()
             dispatch({ type: "LOGIN_SUCCESS", payload: res });
         })
     }
@@ -52,7 +53,7 @@ export default function Followers() {
                 followId: id
             }
         }).then((res) => {
-
+        fetchFollowers()
             dispatch({ type: "LOGIN_SUCCESS", payload: res });
         })
     }
@@ -81,16 +82,16 @@ export default function Followers() {
 
                             {followers.map((follower) => {
 
-                                return (<ListItem alignItems="flex-start" key={follower._id} onClick={()=>{navigate("/user-profile?id=" + follower._id)}}>
+return (<ListItem alignItems="flex-start" key={follower._id} >
+<div onClick={() => { navigate("/user-profile?id=" + follower._id) }}>
+    <ListItemAvatar>
 
-                                    <ListItemAvatar>
-
-                                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        <Avatar alt="Remy Sharp" src={"http://localhost:8060/public/" + follower?.profileImage} />
 
 
-                                    </ListItemAvatar>
-
-                                    <ListItemText 
+        </ListItemAvatar>
+                                    </div>
+                                    <ListItemText
 
                                         secondary={<React.Fragment>
                                             <Typography
@@ -112,6 +113,7 @@ export default function Followers() {
 
                             })
                             }
+                            {followers.length === 0 && <div>No Followers Found</div>}
                             < Divider variant="inset" component="li" />
 
 

@@ -100,6 +100,16 @@ export default function UserProfile() {
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
+                  <div>
+                   <Avatar mt={2} sx={{ width: 60, height: 60 }}>
+
+                    <img src={"http://localhost:8060/public/" + user?.profileImage} className="profileUserImg" />
+
+                    </Avatar><Typography variant="h5">
+                    {user?.firstName}
+                    </Typography>
+                    </div>
+                    
                   <CardMedia
                     component="img"
                     sx={{

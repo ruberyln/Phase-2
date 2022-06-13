@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 
 import Collapse from "@mui/material/Collapse";
 import commonApi from "../api/common";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 //import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -26,6 +26,7 @@ import TextField from "@mui/material/TextField";
 //import CardContent from '@mui/material/CardContent';
 import { CardHeader, CardActions, CardContent } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
+import { useNavigate } from "react-router-dom"
 import moment from "moment";
 //import Stack from '@mui/material/Stack';
 import { Context } from "../userContext/Context";
@@ -50,11 +51,14 @@ function Post({ post, fetchPosts }) {
  
   const { user } = React.useContext(Context);
   let imgPath = ""
+  const navigate = useNavigate()
   if (images.length !== 0) {
     imgPath = baseImageUrl + images[0]
   }
   const [comment, setComment] = useState("");
-
+  //const validateComment=()=>{
+ //   return (comment!=="") 
+ // }
 
   const handleComment = async (e) => {
     e.preventDefault();
@@ -98,6 +102,7 @@ function Post({ post, fetchPosts }) {
             alignItems: "center",
             justifyContent:"center",
             flexGrow: 1, p: 4 }} width="100ch">
+
         <Container component="main">
           <Card
             alignItems="center"
@@ -105,19 +110,30 @@ function Post({ post, fetchPosts }) {
           >
             <CardHeader
               avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                <div onClick={() => {
+                  if (createdBy?._id !== user._id) { navigate("/user-profile?id=" + createdBy?._id) }
+                  else {
+                    navigate("/profile")
+                  }
+                }}>
+                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={"http://localhost:8060/public/" + createdBy?.profileImage}>
 
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                   {(createdBy?._id===user?._id)&&
-                 <Button  variant = "contained" size="small" color = "secondary" onClick={handleDelete}>Delete</Button>}
-                 
-                </IconButton>
+
+            
+                  </Avatar>
+                </div>
               }
               title={createdBy ? createdBy.userName : "John"}
               subheader={moment(createdAt).format("MMMM D, YYYY")}
+
+              action={
+                <IconButton aria-label="settings">
+                   {(createdBy?._id===user?._id)&&
+                 <Button   size="small" color = "secondary" onClick={handleDelete}><DeleteIcon/></Button>}
+                 
+                </IconButton>
+              }
+              
             />
             <CardMedia
               component="img"
@@ -191,9 +207,9 @@ function Post({ post, fetchPosts }) {
               display="flex"
               justifyContent="flex-end"
               alignItems="flex-end"
-              onClick={handleComment}
+              
             >
-              <Button size="small" color= "secondary" variant = "contained">Post</Button>
+              <Button disabled={comment === ""} onClick={handleComment} size="small" color= "secondary" variant = "contained">Post</Button>
             </Box>
           </Card>
         </Container>

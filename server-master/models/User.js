@@ -26,6 +26,9 @@ const UserSchema = new Schema({
   password: {
     type: String
   },
+  password2: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

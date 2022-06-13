@@ -40,6 +40,7 @@ export default function Following() {
             }
 
         }).then((res) => {
+            fetchFriends()
             // window.location.reload(false);
             dispatch({ type: "LOGIN_SUCCESS", payload: res });
         })
@@ -53,6 +54,7 @@ export default function Following() {
                 followId: id
             }
         }).then((res) => {
+            fetchFriends()
             // window.location.reload(false);
             dispatch({ type: "LOGIN_SUCCESS", payload: res });
         })
@@ -83,15 +85,13 @@ export default function Following() {
                         {friends.map((friend) => (
                             <Grid item key={friend._id} xs={12} >
                                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', mt: '4' }}>
-                                    <ListItem alignItems="flex-start" onClick={() => { navigate("/user-profile?id=" + friend._id) }}>
-
-                                        <ListItemAvatar>
-
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-
-
+                                <ListItem alignItems="flex-start" >
+                                <div onClick={() => { navigate("/user-profile?id=" + friend._id) }}>
+                                            <ListItemAvatar>
+                                            <Avatar alt="Remy Sharp" src={"http://localhost:8060/public/" + friend?.profileImage} />
+      
                                         </ListItemAvatar>
-
+                                        </div>
                                         <ListItemText
 
                                             secondary={<React.Fragment>
@@ -115,6 +115,7 @@ export default function Following() {
                                 </List>
                             </Grid>
                         ))}
+                        {friends.length===0 &&<div>No Friends Found</div>}
                     </Grid>
                 </Box>
 

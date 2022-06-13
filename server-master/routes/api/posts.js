@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Load Post model
 const Post = require("../../models/posts");
-
+const User = require("../../models/User");
 router.post("/create", async (req, res) => {
   let body = req.body;
 
@@ -15,7 +15,18 @@ router.post("/create", async (req, res) => {
 
 
 router.post("/findAll", async (req, res) => {
-  let { data={} } = req.body;
+  let { data = {} } = req.body;
+
+  if (data?.options) {
+    let users = await User.findOne({ _id: data.userId })
+    delete data.options
+    console.log("users",users)
+    data.createdBy = {
+      $in: users.following
+    }
+    delete data.userId
+    console.log("data",data)
+  }
 
   let result = await Post.find(data)
     .populate([
@@ -35,19 +46,20 @@ router.post("/upVote", async (req, res) => {
       $addToSet: {
         likes: body.userId
       },
-      $pull:{
-        disLikes:body.userId
+      $pull: {
+        disLikes: body.userId
       }
     },
+
     { new: true }
   );
   return res.status(200).json(result);
 });
 
-router.delete("/", async(req,res)=>{
+router.delete("/", async (req, res) => {
 
-let result = await  Post.findOneAndDelete(
-  {_id:req.body.postId})
+  let result = await Post.findOneAndDelete(
+    { _id: req.body.postId })
   return res.status(200).json(result)
 });
 // {
@@ -76,8 +88,8 @@ router.post("/downVote", async (req, res) => {
       $addToSet: {
         disLikes: body.userId
       },
-      $pull:{
-        likes:body.userId
+      $pull: {
+        likes: body.userId
       }
     },
     { new: true }
